@@ -1,0 +1,37 @@
+<div class="modal-body">
+    @if(beingEdited) {
+        <h3 class="d-flex justify-content-center p-3">Editing {{editedId}}</h3> 
+    } @else {
+        <h3 class="d-flex justify-content-center p-3">Add New Numerical Method</h3>
+    }
+    <form [formGroup]="formNumMethod" (ngSubmit)="addNumMethod()" class="d-flex flex-column p-5 justify-content-center">
+        <div class="mb-3">
+            <label for="title" class="form-label">Numerical Method:</label>
+            <input type="text" class="form-control" id="title" formControlName="title" />
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <input type="text" class="form-control" id="description" formControlName="description" />
+        </div>
+        <div class="mb-3">
+            <label for="steps" class="form-label">Steps:</label>
+            <input type="text" class="form-control" id="steps" formControlName="steps" />  
+        </div>
+        <div class="mb-3">
+            <label for="theme" class="form-label">Nota:</label>
+            <input type="text" class="form-control" id="rating" formControlName="rating" />
+        </div>
+        @if(beingEdited) {
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        } @else {
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        }
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary"
+    data-bs-dismiss="modal">Cancelar</button>
+</div>
+
+
+
