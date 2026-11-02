@@ -8,11 +8,11 @@ import { NotfoundPage } from './shared/components/notfound-page/notfound-page';
 
 export const routes: Routes = [
     { path: '', component: Home },
-    { path: 'methods', component: MethodsPage },
-    { path: 'methods/register', component:RegistermethodPage },
-    { path: 'implementations', component:ImplementationPage },
-    { path: 'implementations/register', component:RegisterimplementationPage },
-    { path: 'methods/:id/edit', component:RegistermethodPage },
-    { path: 'implementations/:id/edit', component:RegisterimplementationPage },
-    { path: '**', component:NotfoundPage }
+    { path: 'methods/register', component: RegistermethodPage },
+    { path: 'methods/:id/view', component: MethodsPage },
+    { path: 'methods/:id/edit', component: RegistermethodPage },
+    { path: 'implementations/register', component: RegisterimplementationPage },
+    { path: 'implementations/:id/view', component: ImplementationPage },
+    { path: 'implementations/:id/edit', component: RegisterimplementationPage },
+    { path: '**', component: NotfoundPage }
 ];

@@ -8,9 +8,9 @@ import { DbService } from './db-service';
 })
 
 export class NumMethodService {
-  private numMethodsSignal = signal<NumMethodModel[]>([]);
+  numMethodsSignal = signal<NumMethodModel[]>([]);
   implementationsService = inject(ImplementationsService);
-  private dbService = inject(DbService);
+  dbService = inject(DbService);
 
   constructor() {
     this.dbService.numMethods.toArray().then(numMethods => {

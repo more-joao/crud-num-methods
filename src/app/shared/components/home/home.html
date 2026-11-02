@@ -1,1 +1,87 @@
-<p>home works!</p>
+<div class="p-2 d-flex flex-column">
+    <div class="d-flex justify-content-center flex-column align-items-center p-2">
+        <h2 class="p-2">Numerical Method Implementation Library</h2>
+        <div class="d-flex justify-content-between gap-2">
+            <input type="text" size="75", placeholder="language, method" id="searchBar" type="text" [(ngModel)]="searchBar">
+            <button class="btn btn-primary" (click)="this.search()">Search</button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around p-2">
+        <a routerLink="/methods/register">Add Method</a>
+        <a routerLink="/implementations/register">Add Implementation</a>
+        <a routerLink="/">Implementation Statistics (by language)</a>
+    </div>
+</div>
+<hr>
+<div class="d-flex justify-content-between">
+    <h4>Database</h4>
+    <button class="btn btn-primary" (click)="this.toggleListing()">[Toggle] Listing {{this.currentShowMode}}</button>
+</div>
+
+<hr>
+<div class="d-flex gap-5 p-2 justify-content-between">
+    @if (this.showMethods) {
+       <div class="d-flex flex-column">
+            <h5>Numerical Methods</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (this.fetchedMethods().length > 0) {
+                        @for (method of this.fetchedMethods(); track method.id; let i = $index) {
+                            <tr>
+                                <th scope="row">{{ method.id }}</th>
+                                <td>{{ method.title }}</td>
+                                <td>{{ method.description }}</td>
+                                <td><a routerLink="methods/{{method.id}}/view">View</a> / <a href="methods/{{method.id}}/edit">Edit</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div> 
+    }
+    
+    @if (this.showImplementations) {
+        <div class="d-flex flex-column">
+            <h5>Implementations</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+    
+</div>
