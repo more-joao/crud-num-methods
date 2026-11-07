@@ -21,7 +21,9 @@
     "bootstrap-icons": "^1.13.2",
     "dexie": "^4.4.7",
     "katex": "^0.19.1",
+    "node": "^27.0.0-alpha.0.0.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.26.25",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

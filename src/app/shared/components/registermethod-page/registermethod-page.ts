@@ -23,7 +23,12 @@ export class RegistermethodPage {
     beingEdited = this.route.snapshot.paramMap.has('id');
     editedId = Number(this.route.snapshot.paramMap.get('id'))
 
-    readonly developers = this.numMethodsService.numMethods();
+    // variables for rendering reference (pulls from input fields)
+    descriptionInput = ''
+    convergenceCriteriaInput= ''
+    stepsInput = ''
+
+    readonly numMethods = this.numMethodsService.numMethods();
 
     constructor() { 
       if (this.beingEdited) {
@@ -55,9 +60,27 @@ export class RegistermethodPage {
             convergCriteria: this.formNumMethod.value.convergCriteria!,
       };
 
-      this.numMethodsService.addNumMethod(newMethod).then(() => {
-            this.formNumMethod.reset();
-            this.router.navigate(['/'])
-      }); 
+      if (this.beingEdited) {
+          this.numMethodsService.updateNumMethod(
+          this.editedId, 
+          this.formNumMethod.value.title!,
+          this.formNumMethod.value.description!,
+          this.formNumMethod.value.steps!,
+          this.formNumMethod.value.convergCriteria!
+        ).then(() => {
+          this.formNumMethod.reset();
+          this.router.navigate(['/'])
+        })
+
+      } else {
+        this.numMethodsService.addNumMethod(newMethod).then(() => {
+          this.formNumMethod.reset();
+          this.router.navigate(['/'])
+        });
+      }
+    }
+
+    refreshRender() {
+      
     }
 }

@@ -1,1 +1,56 @@
-<p>registerimplementation-page works!</p>
+<div class="d-flex ">
+    <div class="modal-body flex-fill" style="flex: 7 1 0;">
+        @if(beingEdited) {
+            <h3 class="d-flex justify-content-center">Editing {{editedId}}</h3> 
+        } @else {
+            <h3 class="d-flex justify-content-center">Add Implementation</h3>
+        }
+        <form [formGroup]="formImplementation" (ngSubmit)="addImplementation()" class="d-flex flex-column p-5 justify-content-center">
+            <div class="d-flex flex-column">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Implementation Title</label>
+                    <input type="text" class="form-control" id="title" formControlName="title" size="5"/>
+                </div>
+                @if (!beingEdited) {
+                    <div class="mb-3">
+                        <select class="form-select" formControlName="methodId">
+                            @for (m of methods; track m) {
+                                <option [ngValue]="m.id">{{ m.title }}</option>
+                            }
+                        </select>
+                    </div>
+                }
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex ">
+                        <div>
+                            <label for="progLang" class="form-label">Programming Language</label>
+                            <textarea type="text" class="form-control" id="progLang" placeholder="programming language used." rows="1" cols="40" formControlName="progLang"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div>
+                            <label for="numLines" class="form-label">Number of Lines</label>
+                            <textarea type="text" class="form-control" id="numLines" placeholder="" rows="1" cols="2" formControlName="numLines"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div>
+                    <label for="code" class="form-label">Code</label>
+                    <textarea type="text" class="form-control" id="code" placeholder="code" rows="10" cols="50" formControlName="code"></textarea>
+                </div>
+            </div>
+
+            @if(beingEdited) {
+                <button type="submit" class="btn btn-primary">Save</button>
+            } @else {
+                <button type="submit" class="btn btn-primary">Add</button>
+            }
+
+        </form>
+    </div>
+</div>
+
+
+

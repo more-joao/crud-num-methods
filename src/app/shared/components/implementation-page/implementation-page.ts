@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { NumMethodService } from '../../services/num-method-service';
+import { ImplementationsService } from '../../services/implementations-service';
+import { DbService } from '../../services/db-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-implementation-page',
@@ -6,4 +11,5 @@ import { Component } from '@angular/core';
   templateUrl: './implementation-page.html',
   styleUrl: './implementation-page.css',
 })
+
 export class ImplementationPage {}

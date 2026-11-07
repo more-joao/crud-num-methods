@@ -5,6 +5,7 @@
         } @else {
             <h3 class="d-flex justify-content-center">Add New Numerical Method</h3>
         }
+        <a class="d-flex justify-content-center" href="https://katex.org/docs/supported.html" target="_blank" rel="noopener noreferrer">See KaTeX docs for reference.</a>
         <form [formGroup]="formNumMethod" (ngSubmit)="addNumMethod()" class="d-flex flex-column p-5 justify-content-center">
             <div class="d-flex flex-column">
                 <div class="mb-3">
@@ -15,13 +16,13 @@
                     <div class="d-flex ">
                         <div>
                             <label for="description" class="form-label">Description</label>
-                            <textarea type="text" class="form-control" id="description" placeholder="add a description. allows KaTeX." rows="10" cols="40" formControlName="description"></textarea>
+                            <textarea type="text" class="form-control" id="description" placeholder="add a description." rows="10" cols="40" formControlName="description" [(ngModel)]="descriptionInput"></textarea>
                         </div>
                     </div>
                     <div class="d-flex mb-3">
                         <div>
                             <label for="convergCriteria" class="form-label">Convergence Criteria</label>
-                            <textarea type="text" class="form-control" id="convergCriteria" placeholder="enter basic criteria for convergence. allows KaTeX" rows="10" cols="50" formControlName="convergCriteria"></textarea>
+                            <textarea type="text" class="form-control" id="convergCriteria" placeholder="enter basic criteria for convergence. allows KaTeX" rows="10" cols="50" formControlName="convergCriteria" [(ngModel)]="convergenceCriteriaInput"></textarea>
                         </div>
                     </div>
                 </div>
@@ -29,7 +30,7 @@
             <div class="mb-3">
                 <div>
                     <label for="steps" class="form-label">Steps</label>
-                    <textarea type="text" class="form-control" id="steps" placeholder="describe the steps. allows KaTeX." rows="10" cols="50" formControlName="steps"></textarea>
+                    <textarea type="text" class="form-control" id="steps" placeholder="describe the steps. allows KaTeX." rows="10" cols="50" formControlName="steps" [(ngModel)]="stepsInput"></textarea>
                 </div>
             </div>
 
@@ -44,27 +45,30 @@
     <div style="flex: 5 1 0;">
         <div class="d-flex justify-content-between">
             <h3>Rendered Preview</h3>
-            <button class="btn btn-primary">Refresh</button>
         </div>
-        <div class="d-flex shrink flex-wrap p-5">
+        <div class="d-flex flex-column shrink flex-wrap p-5">
             <h4>Method Title</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio exercitationem, tempore sed labore doloremque corrupti provident vel similique laborum eius facilis aliquid, doloribus ipsum consequuntur, eveniet repellat officiis necessitatibus sapiente.</p>
-            <h4>Description</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta consequuntur nam officia enim iure, eum molestias magnam magni voluptas dolorum, asperiores alias eaque laudantium itaque eveniet culpa pariatur accusantium perspiciatis?</p>
-            <h4>Convergence Criteria</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta consequuntur nam officia enim iure, eum molestias magnam magni voluptas dolorum, asperiores alias eaque laudantium itaque eveniet culpa pariatur accusantium perspiciatis?</p>
-            <h4>Steps</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta consequuntur nam officia enim iure, eum molestias magnam magni voluptas dolorum, asperiores alias eaque laudantium itaque eveniet culpa pariatur accusantium perspiciatis?</p>
-            
+            @if (descriptionInput != '') {
+                <p>{{  descriptionInput  }}</p>
+            } @else {
+                <p>[Description] Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta consequuntur nam officia enim iure, eum molestias magnam magni voluptas dolorum, asperiores alias eaque laudantium itaque eveniet culpa pariatur accusantium perspiciatis?</p>
+            }
+
+            <h5>Convergence Criteria</h5>
+            @if (convergenceCriteriaInput != '') {
+                <p>{{  convergenceCriteriaInput  }}</p>
+            } @else {
+                <p>[Description] Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta consequuntur nam officia enim iure, eum molestias magnam magni voluptas dolorum, asperiores alias eaque laudantium itaque eveniet culpa pariatur accusantium perspiciatis?</p>
+            }
+
+            <h5>Steps</h5>
+            @if (stepsInput != '') {
+                <p>{{  stepsInput  }}</p>
+            } @else {
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta consequuntur nam officia enim iure, eum molestias magnam magni voluptas dolorum, asperiores alias eaque laudantium itaque eveniet culpa pariatur accusantium perspiciatis?</p>
+            }
         </div>
-        
-
     </div>
-</div>
-
-<div class="modal-footer">
-    <button class="btn btn-secondary"
-    data-bs-dismiss="modal">Cancel</button>
 </div>
 
 

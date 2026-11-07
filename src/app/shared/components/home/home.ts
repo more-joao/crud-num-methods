@@ -26,7 +26,7 @@ export class Home {
   currentShowMode = 'All';
 
   fetchedMethods = this.methodsService.numMethods;
-  //fetchedImplementationsSignal = 
+  fetchedImplementations = this.implementationsService.implementations 
 
   search() {
     console.log(this.fetchedMethods().length);

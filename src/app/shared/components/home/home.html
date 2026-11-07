@@ -38,7 +38,7 @@
                                 <th scope="row">{{ method.id }}</th>
                                 <td>{{ method.title }}</td>
                                 <td>{{ method.description }}</td>
-                                <td><a routerLink="methods/{{method.id}}/view">View</a> / <a href="methods/{{method.id}}/edit">Edit</a></td>
+                                <td><a routerLink="methods/{{method.id}}/view">View</a> / <a href="methods/{{method.id}}/edit">Edit</a> / <a class="text-decoration-underline text-danger" href="#" (click)="this.methodsService.removeNumMethod(method.id!)">Delete</a></td>
                             </tr>
                         }
                     }
@@ -55,29 +55,23 @@
                     <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Programming Language</th>
+                    <th scope="col">Numerical Method</th>
                     <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    </tr>
+                    @if (this.fetchedImplementations().length > 0) {
+                        @for (imp of this.fetchedImplementations(); track imp.id; let i = $index) {
+                            <tr>
+                                <th scope="row">{{ imp.id }}</th>
+                                <td>{{ imp.title }}</td>
+                                <td>{{ imp.progLang }}</td>
+                                <td>{{ this.methodsService.numMethods().filter(m => m.id == imp.methodId)[0].title }}</td>
+                                <td><a routerLink="implementations/{{imp.id}}/view">View</a> / <a routerLink="implementations/{{imp.id}}/edit">Edit</a> / <a class="text-decoration-underline text-danger" href="#" (click)="this.implementationsService.removeImplementation(imp.id!)">Delete</a></td>
+                            </tr>
+                        }
+                    }
                 </tbody>
             </table>
         </div>

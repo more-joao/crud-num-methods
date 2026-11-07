@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { NumMethodModel } from '../models/num-method-model';
 import { ImplementationsService } from './implementations-service';
 import { DbService } from './db-service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -35,34 +36,29 @@ export class NumMethodService {
     });
   }
 
-  // updateNumMethod(id: number, title: string, desc: string, foundingYear: number, rating?: number) {
-  //   return this.dbService.developers
-  //   .update(id, {name:name, countryOrigin:countryOrigin, foundingYear:foundingYear, rating:rating})
-  //   .then(() => this.dbService.developers.toArray())
-  //   .then((developers: Developer[]) => this.developersSignal.set(developers));
-  // }
+  updateNumMethod(id: number, title: string, description: string, steps: string, convergCriteria: string) {
+    return this.dbService.numMethods
+    .update(id, {title:title, description:description, steps:steps, convergCriteria:convergCriteria})
+    .then(() => this.dbService.numMethods.toArray())
+    .then((methods: NumMethodModel[]) => this.numMethodsSignal.set(methods));
+  }
 
   removeNumMethod(id: number) {
-    // if (this.gamesService.games().filter(game => game.developerId === id).length != 0) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...", 
-    //     text: "Desenvolvedora possui jogos cadastrados. Não é possível excluir.",
-    //   });
-    //   return null
+    if (this.implementationsService.implementations().filter(imp => imp.methodId === id).length != 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...", 
+        text: "Method has existing implementations. Delete them before continuing.",
+      });
+      
+      return null
 
-    // } else {
-    //     return this.dbService.developers.delete(id).then(() => {
-    //       this.developersSignal.update((devs: Developer[]) =>
-    //         devs.filter((d: Developer) => d.id != id)
-    //       );
-    //     });
-    // }
-
-    return this.dbService.numMethods.delete(id).then(() => {
+    } else {
+        return this.dbService.numMethods.delete(id).then(() => {
           this.numMethodsSignal.update((methods: NumMethodModel[]) =>
             methods.filter((m: NumMethodModel) => m.id != id)
-      );
-    });
+          );
+        });
+    }
   }
 }
